@@ -1,6 +1,6 @@
 require 'async/websocket/adapters/rails'
 
-class ClockTag < Live::Tag
+class ClockTag < Live::View
   def initialize(name)
     @name = name
   end
@@ -38,3 +38,4 @@ class ClockController < ApplicationController
       Live::Page.new(RESOLVER).run(connection)
     end
   end
+end
