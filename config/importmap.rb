@@ -8,3 +8,4 @@ pin_all_from "app/javascript/controllers", under: "controllers"
 
 pin "morphdom" # @2.7.2
 pin "@socketry/live", to: "@socketry--live.js" # @0.14.0
+pin "live"
