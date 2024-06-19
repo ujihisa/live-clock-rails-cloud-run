@@ -2,13 +2,13 @@ require 'async/websocket/adapters/rails'
 
 class ClockTag < Live::View
   def bind(page)
-    super
+    super # @page = page
 
     # Schedule a refresh every second:
     Async do
-      while true
-        sleep 1
+      while @page
         update!
+        sleep 1
       end
     end
   end
