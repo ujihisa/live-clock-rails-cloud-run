@@ -1,10 +1,6 @@
 require 'async/websocket/adapters/rails'
 
 class ClockTag < Live::View
-  def initialize(name)
-    @name = name
-  end
-
   def bind(page)
     super
 
@@ -12,7 +8,7 @@ class ClockTag < Live::View
     Async do
       while true
         sleep 1
-        replace!
+        update!
       end
     end
   end
