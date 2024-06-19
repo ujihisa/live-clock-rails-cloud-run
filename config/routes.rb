@@ -8,6 +8,6 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-  get 'clock/index'
+  root 'clock#index'
   match "clock/live", via: [:get, :connect]
 end
