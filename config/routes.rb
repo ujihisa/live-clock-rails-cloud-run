@@ -9,5 +9,5 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   root 'clock#index'
-  match "clock/live", via: [:get, :connect]
+  match 'live', to: 'clock#live', via: [:get, :connect]
 end

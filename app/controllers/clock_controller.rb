@@ -9,8 +9,6 @@ class ClockTag < Live::View
   def bind(page)
     super # @page = page
 
-    @font_scale = 1
-
     # Schedule a refresh every second:
     Async do
       while @page
