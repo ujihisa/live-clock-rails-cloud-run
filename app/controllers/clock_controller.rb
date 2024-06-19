@@ -1,8 +1,15 @@
 require 'async/websocket/adapters/rails'
 
 class ClockTag < Live::View
+  def initialize(...)
+    super(...)
+    @font_scale = 1
+  end
+
   def bind(page)
     super # @page = page
+
+    @font_scale = 1
 
     # Schedule a refresh every second:
     Async do
@@ -14,8 +21,19 @@ class ClockTag < Live::View
   end
 
   def render(builder)
-    builder.tag('div') do
-      builder.text(Time.now.to_s)
+    builder.tag('div', onclick: forward_event) do
+      builder.tag('font', style: "font-size: #{@font_scale * 100}%;") do
+        builder.text(Time.now.to_s)
+      end
+    end
+  end
+
+  def handle(event)
+    Rails.logger.info(event)
+    case event[:type]
+    when 'click'
+      @font_scale += 1
+      update!
     end
   end
 end
