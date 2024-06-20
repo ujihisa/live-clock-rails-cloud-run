@@ -2,6 +2,7 @@ require 'async/websocket/adapters/rails'
 
 class ClockTag < Live::View
   @@font_scale = 1
+  @@events = []
 
   def initialize(...)
     super(...)
@@ -20,18 +21,30 @@ class ClockTag < Live::View
   end
 
   def render(builder)
-    builder.tag('div', onclick: forward_event) do
-      builder.tag('font', style: "font-size: #{@@font_scale * 100}%;") do
-        builder.text(Time.now.to_s)
-      end
-    end
+    # builder.tag('div', onclick: forward_event) do
+      builder.append(<<~"EOF")
+      <div style="border: solid 1px; height: 480px" onclick="live.forward('clock', {type: 'click', clientX: event.clientX, clientY: event.clientY});">
+        <font style="font-size: #{(@@font_scale * 100).to_i}%;">
+          #{Time.now}
+        </font>
+      </div>
+      #{
+        @@events.map {|event|
+          <<~EOF
+          <div style="background-color: red; position: absolute; left: #{event[:clientX] - 5}px; top: #{event[:clientY] - 5}px; width: 10px; height: 10px;">
+          </div>
+          EOF
+        }.join
+      }
+      EOF
   end
 
   def handle(event)
-    Rails.logger.info(event)
+    pp event
     case event[:type]
     when 'click'
-      @@font_scale += 0.01
+      @@font_scale += 0.1
+      @@events << event
       update!
     end
   end
@@ -41,7 +54,7 @@ class ClockController < ApplicationController
   RESOLVER = Live::Resolver.allow(ClockTag)
 
   def index
-    @tag = ClockTag.new('flappy')
+    @tag = ClockTag.new('clock')
   end
 
   skip_before_action :verify_authenticity_token, only: :live
