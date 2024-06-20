@@ -1,9 +1,10 @@
 require 'async/websocket/adapters/rails'
 
 class ClockTag < Live::View
+  @@font_scale = 1
+
   def initialize(...)
     super(...)
-    @font_scale = 1
   end
 
   def bind(page)
@@ -20,7 +21,7 @@ class ClockTag < Live::View
 
   def render(builder)
     builder.tag('div', onclick: forward_event) do
-      builder.tag('font', style: "font-size: #{@font_scale * 100}%;") do
+      builder.tag('font', style: "font-size: #{@@font_scale * 100}%;") do
         builder.text(Time.now.to_s)
       end
     end
@@ -30,7 +31,7 @@ class ClockTag < Live::View
     Rails.logger.info(event)
     case event[:type]
     when 'click'
-      @font_scale += 1
+      @@font_scale += 0.01
       update!
     end
   end
