@@ -8,6 +8,6 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-  root 'clock#index'
-  match 'live', to: 'clock#live', via: [:get, :connect]
+  root 'cookie#index'
+  match 'live', to: 'cookie#live', via: [:get, :connect]
 end

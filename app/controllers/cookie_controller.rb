@@ -1,6 +1,6 @@
 require 'async/websocket/adapters/rails'
 
-class ClockTag < Live::View
+class CookieTag < Live::View
   @@font_scale = 1
   @@events = []
 
@@ -50,11 +50,11 @@ class ClockTag < Live::View
   end
 end
 
-class ClockController < ApplicationController
-  RESOLVER = Live::Resolver.allow(ClockTag)
+class CookieController < ApplicationController
+  RESOLVER = Live::Resolver.allow(CookieTag)
 
   def index
-    @tag = ClockTag.new('clock')
+    @tag = CookieTag.new('clock')
   end
 
   skip_before_action :verify_authenticity_token, only: :live
