@@ -13,3 +13,31 @@
  *= require_tree .
  *= require_self
  */
+html {
+  padding: 0;
+  margin: 0;
+}
+body {
+  padding: 0;
+  margin: 0;
+}
+
+.all {
+  border: solid 1px;
+  min-height: 100vh;
+  padding: 0;
+}
+
+.cookie {
+  border: solid 1px;
+  width: 50vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-size: 50vh;
+}
+.menu {
+  border: solid 1px;
+  width: 50vw;
+}

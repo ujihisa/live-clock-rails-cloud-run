@@ -1,5 +1,15 @@
 <%= javascript_import_module_tag "live" %>
 
-<h1>Clock</h1>
-
-<%= @tag.to_html %>
+<div class="all" onclick="live.forward('cookie', {type: 'click', clientX: event.clientX, clientY: event.clientY});">
+  <h1>Cookie Clicker Inspired</h1>
+  <table>
+    <tr>
+      <td class="cookie">
+        🍪
+      </td>
+      <td class="menu">
+        <%= @tag.to_html %>
+      </td>
+    </tr>
+  </table>
+</div>

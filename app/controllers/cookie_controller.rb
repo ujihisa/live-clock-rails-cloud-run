@@ -23,11 +23,9 @@ class CookieTag < Live::View
   def render(builder)
     # builder.tag('div', onclick: forward_event) do
       builder.append(<<~"EOF")
-      <div style="border: solid 1px; height: 480px" onclick="live.forward('clock', {type: 'click', clientX: event.clientX, clientY: event.clientY});">
-        <font style="font-size: #{(@@font_scale * 100).to_i}%;">
-          #{Time.now}
-        </font>
-      </div>
+      <font style="font-size: #{(@@font_scale * 100).to_i}%;">
+        #{Time.now}
+      </font>
       #{
         @@events.map {|event|
           <<~EOF
@@ -54,7 +52,7 @@ class CookieController < ApplicationController
   RESOLVER = Live::Resolver.allow(CookieTag)
 
   def index
-    @tag = CookieTag.new('clock')
+    @tag = CookieTag.new('cookie')
   end
 
   skip_before_action :verify_authenticity_token, only: :live
