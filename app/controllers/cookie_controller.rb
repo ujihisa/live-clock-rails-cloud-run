@@ -3,6 +3,7 @@ require 'async/websocket/adapters/rails'
 class CookieTag < Live::View
   @@font_scale = 1
   @@events = []
+  @@num_cookies = 0
 
   def initialize(...)
     super(...)
@@ -24,7 +25,7 @@ class CookieTag < Live::View
     # builder.tag('div', onclick: forward_event) do
       builder.append(<<~"EOF")
       <font style="font-size: #{(@@font_scale * 100).to_i}%;">
-        #{Time.now}
+        #{@@num_cookies} cookies
       </font>
       #{
         @@events.map {|event|
@@ -41,6 +42,7 @@ class CookieTag < Live::View
     pp event
     case event[:type]
     when 'click'
+      @@num_cookies += 1
       @@font_scale += 0.1
       @@events << event
       update!
