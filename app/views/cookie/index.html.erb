@@ -9,6 +9,15 @@
       </td>
       <td class="menu">
         <%= @tag.to_html %>
+        <div class="shop">
+          <h2>Shop</h2>
+          <div class="item" onclick="live.forward('buy', {type: 'click', item: 'cursor'});">
+            <p>
+            Cursor: <span class="price">10</span>
+            </p>
+            <input type="submit" value="Buy (cost: 1)" onclick="live.forward('buy', {type: 'click', item: 'cursor'});">
+          </div>
+        </div>
       </td>
     </tr>
   </table>
